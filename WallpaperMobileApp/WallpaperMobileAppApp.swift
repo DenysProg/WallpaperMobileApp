@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct WallpaperMobileAppApp: App {
+    @StateObject var loadingViewModel: LoadPhotoViewModel = LoadPhotoViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                ContentView()
+            }
+            .navigationViewStyle(.stack)
+            .environmentObject(loadingViewModel)
         }
     }
 }

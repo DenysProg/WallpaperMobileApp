@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomePageTab.swift
 //  WallpaperMobileApp
 //
 //  Created by Denys Nikolaichuk on 01.05.2023.
@@ -7,26 +7,26 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomePageTab: View {
     @EnvironmentObject private var viewModel: LoadPhotoViewModel
-    @State var selectedTab: Int = 0
     
     var body: some View {
-        TabView {
-            HomePageTab()
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
+        ZStack {
+            List {
+                ForEach(viewModel.photoArray) { photo in
+                    Text(photo.description)
                 }
+            }
         }
     }
+    
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomePageTab_Previews: PreviewProvider {
+    @Binding var taab: Int
+    
     static var previews: some View {
-        ContentView()
+        HomePageTab()
             .environmentObject(LoadPhotoViewModel())
     }
 }
-
-
