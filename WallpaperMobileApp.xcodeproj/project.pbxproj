@@ -52,7 +52,10 @@
 			isa = PBXGroup;
 			children = (
 				C283D3C329FFA8100077C47F /* WallpaperMobileAppApp.swift */,
-				C283D3C529FFA8100077C47F /* ContentView.swift */,
+				C283D3D429FFAAC10077C47F /* Utilities */,
+				C283D3D129FFAA520077C47F /* Views */,
+				C283D3D229FFAAA00077C47F /* Models */,
+				C283D3D329FFAAAD0077C47F /* ViewModels */,
 				C283D3C729FFA8120077C47F /* Assets.xcassets */,
 				C283D3C929FFA8120077C47F /* Preview Content */,
 			);
@@ -65,6 +68,35 @@
 				C283D3CA29FFA8120077C47F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C283D3D129FFAA520077C47F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C283D3C529FFA8100077C47F /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C283D3D229FFAAA00077C47F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C283D3D329FFAAAD0077C47F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C283D3D429FFAAC10077C47F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
