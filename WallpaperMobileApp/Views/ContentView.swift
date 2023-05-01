@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var viewModel: LoadPhotoViewModel
+    @EnvironmentObject private var viewModel: DownloadingImagesViewModel
     @State var selectedTab: Int = 0
     
     var body: some View {
@@ -25,7 +25,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(LoadPhotoViewModel())
+            .environmentObject(DownloadingImagesViewModel())
     }
 }
 

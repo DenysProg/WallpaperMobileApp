@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct HomePageTab: View {
-    @EnvironmentObject private var viewModel: LoadPhotoViewModel
+    @EnvironmentObject private var viewModel: DownloadingImagesViewModel
     
     var body: some View {
-        ZStack {
+        VStack {
             List {
                 ForEach(viewModel.photoArray) { photo in
-                    Text(photo.description)
+                    DownloadingImagesRow(photo: photo)
+                        .listRowSeparator(.hidden)
                 }
             }
+            .listStyle(.plain)
         }
     }
     
@@ -27,6 +29,6 @@ struct HomePageTab_Previews: PreviewProvider {
     
     static var previews: some View {
         HomePageTab()
-            .environmentObject(LoadPhotoViewModel())
+            .environmentObject(DownloadingImagesViewModel())
     }
 }

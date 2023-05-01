@@ -13,13 +13,16 @@ struct PhotoModel: Identifiable, Codable {
     let updated_at: String
     let width: Int
     let height: Int
-    let color: String
-    let blur_hash: String
-    let likes: Int
-    let liked_by_user: Bool
-    let description: String
-    let user: UserModel
-    let current_user_collections: CurrentCollectionsModel
+    let alt_description: String?
+    let `description`: String?
+    let urls: UrlsModel?
+}
+
+struct UrlsModel: Codable {
+    let full: String
+    let regular: String
+    let thumb: String
+    let small: String
 }
 
 struct CurrentCollectionsModel: Identifiable, Codable {

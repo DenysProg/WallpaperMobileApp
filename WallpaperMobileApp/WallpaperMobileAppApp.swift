@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct WallpaperMobileAppApp: App {
-    @StateObject var loadingViewModel: LoadPhotoViewModel = LoadPhotoViewModel()
+    @StateObject var loadingViewModel: DownloadingImagesViewModel = DownloadingImagesViewModel()
     
     var body: some Scene {
         WindowGroup {
