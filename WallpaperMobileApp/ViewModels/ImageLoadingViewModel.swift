@@ -11,12 +11,33 @@ import Combine
 class ImageLoadingViewModel: ObservableObject {
     @Published var image: UIImage? = nil
     @Published var isLoading: Bool = false
-    var cancellables = Set<AnyCancellable>()
-    let urlString: String
     
-    init(url: String) {
+    let manager = PhotoModelCacheManager.instance //
+    
+    var cancellables = Set<AnyCancellable>()
+    var urlString: String
+    var imageKey: String
+    
+    init(url: String, key: String) {
         urlString = url
-        downloadImage()
+        imageKey = key
+        getImage()
+    }
+    
+    func getImageDirectly(url: String, key: String) {
+        urlString = url
+        imageKey = key
+        getImage()
+    }
+    
+    func getImage() {
+        if let savedImage = manager.get(name: imageKey) {
+            image = savedImage
+            print("Getting saved image!")
+        } else {
+            downloadImage()
+            print("Downloading image now!")
+        }
     }
     
     func downloadImage() {
@@ -30,7 +51,10 @@ class ImageLoadingViewModel: ObservableObject {
             .sink { [weak self] (_) in
                 self?.isLoading = false
             } receiveValue: { [weak self] (returnedImage) in
-                self?.image = returnedImage
+                guard let self = self,
+                      let image = returnedImage else { return }
+                self.image = returnedImage
+                self.manager.add(image: image, name: self.imageKey)
             }
             .store(in: &cancellables)
     }

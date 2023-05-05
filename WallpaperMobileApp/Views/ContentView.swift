@@ -15,8 +15,18 @@ struct ContentView: View {
         TabView {
             HomePageTab()
                 .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
+                    Image(systemName: "photo")
+                    Text("Photos")
+                }
+            Text("Random category")
+                .tabItem {
+                    Image(systemName: "photo.on.rectangle")
+                    Text("Random category")
+                }
+            Text("Category")
+                .tabItem {
+                    Image(systemName: "photo.stack")
+                    Text("Category")
                 }
         }
     }

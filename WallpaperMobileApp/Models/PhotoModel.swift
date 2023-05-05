@@ -16,6 +16,8 @@ struct PhotoModel: Identifiable, Codable {
     let alt_description: String?
     let `description`: String?
     let urls: UrlsModel?
+    let links: PhotoLinksModel?
+    let user: UserModel?
 }
 
 struct UrlsModel: Codable {
@@ -34,3 +36,22 @@ struct CurrentCollectionsModel: Identifiable, Codable {
     let cover_photo: String
 }
 
+struct PhotoLinksModel: Codable {
+    let `self`: String
+    let html: String
+    let download: String
+    let download_location: String
+}
+
+struct UserModel: Codable {
+    let id: String
+    let name: String
+    let username: String
+    let profile_image: ProfileImageModel?
+}
+
+struct ProfileImageModel: Codable {
+    let small: String
+    let medium: String
+    let large: String
+}

@@ -11,8 +11,8 @@ import Foundation
 struct DownloadingImageView: View {
     @StateObject var loader: ImageLoadingViewModel
     
-    init(url: String) {
-        _loader = StateObject(wrappedValue: ImageLoadingViewModel(url: url))
+    init(url: String, key: String) {
+        _loader = StateObject(wrappedValue: ImageLoadingViewModel(url: url, key: key))
     }
     
     var body: some View {
@@ -38,7 +38,7 @@ struct DownloadingImageView: View {
 
 struct DownloadingImageView_Previews: PreviewProvider {
     static var previews: some View {
-        DownloadingImageView(url: "https://via.placeholder.com/600/92c952")
+        DownloadingImageView(url: placeHolderImage, key: "1")
             .frame(height: 300)
             .previewLayout(.sizeThatFits)
     }

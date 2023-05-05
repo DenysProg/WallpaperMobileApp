@@ -10,7 +10,9 @@ import Combine
 
 class PhotoModelDataService {
     static let instatne = PhotoModelDataService()
+    
     @Published var photoModels: [PhotoModel] = []
+    @Published var page: Int = 1
     var cancellables = Set<AnyCancellable>()
     
     private init() {
@@ -18,8 +20,7 @@ class PhotoModelDataService {
     }
     
     func downloadData() {
-        guard let url = URL(string: "https://api.unsplash.com/photos?page=1&client_id=8EN1sryixWQtRetOI-C8FvFQyZgO15Q-FBDWSP4QF5I") else { return }
-        
+        guard let url = URL(string: "https://api.unsplash.com/photos?page=\(page)&client_id=\(publicKey)") else { return }
         
         URLSession.shared.dataTaskPublisher(for: url)
             .subscribe(on: DispatchQueue.global(qos: .background))
@@ -35,7 +36,7 @@ class PhotoModelDataService {
                 }
                 
             } receiveValue: { [weak self] returnedPhotoModel in
-                self?.photoModels = returnedPhotoModel
+                self?.photoModels.append(contentsOf: returnedPhotoModel) 
             }
             .store(in: &cancellables)
     }

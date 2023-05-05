@@ -10,6 +10,10 @@ import Combine
 
 class DownloadingImagesViewModel: ObservableObject {
     @Published var photoArray: [PhotoModel] = []
+    @Published var photo: PhotoModel? = nil
+    
+    @Published var offset: Int = 0
+    
     private let dataService = PhotoModelDataService.instatne
     var cancellables = Set<AnyCancellable>()
     
@@ -23,5 +27,10 @@ class DownloadingImagesViewModel: ObservableObject {
                 self?.photoArray = returnedPhotoModels
             }
             .store(in: &cancellables)
+    }
+    
+    func loadData() {
+        dataService.page += 1
+        dataService.downloadData()
     }
 }
