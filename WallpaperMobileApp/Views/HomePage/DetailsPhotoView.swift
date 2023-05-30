@@ -7,9 +7,17 @@
 
 import SwiftUI
 
+enum WallpaperLoction: Int {
+    case lockScreen = 1
+    case homeScreen = 2
+    case both = 3
+}
+
 struct DetailsPhotoView: View {
     @EnvironmentObject private var viewModel: DownloadingImagesViewModel
     @StateObject var loader: ImageLoadingViewModel
+    @State private var showingLocationSelect: Bool = false
+    @State private var lightImage = UIImage(named: "placeholder")!
     let photo: PhotoModel
     
     init(url: String, key: String, photo: PhotoModel) {
@@ -38,6 +46,37 @@ struct DetailsPhotoView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
                     
+                    Button("Set Wallpaper") {
+                        showingLocationSelect = true
+                    }
+                    .actionSheet(isPresented: $showingLocationSelect) {
+                        ActionSheet(
+                            title: Text("Select location"),
+                            buttons: [
+                                .default(Text("Home Screen")) {
+                                    if let image = loader.image {
+                                        viewModel.setWallpaper(location: .homeScreen, image: image)
+                                    }
+                                },
+                                .default(Text("Lock Screen")) {
+                                    if let image = loader.image {
+                                        viewModel.setWallpaper(location: .lockScreen, image: image)
+                                    }
+                                },
+                                .default(Text("Both")) {
+                                    if let image = loader.image {
+                                        viewModel.setWallpaper(location: .both, image: image)
+                                    }
+                                },
+                                .cancel()
+                            ]
+                        )
+                    }
+                    .frame(width: 250)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(.blue)
+                    .cornerRadius(15)
                 }
             }
         }
@@ -47,6 +86,7 @@ struct DetailsPhotoView: View {
             backButton
         })
     }
+   
 }
 
 struct DetailsPhotoView_Previews: PreviewProvider {

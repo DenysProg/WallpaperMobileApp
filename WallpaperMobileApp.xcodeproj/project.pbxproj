@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C204A3732A012FA100D31694 /* DetailsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C204A3722A012FA100D31694 /* DetailsPhotoView.swift */; };
 		C204A3752A0140FA00D31694 /* ProfileUserSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C204A3742A0140FA00D31694 /* ProfileUserSection.swift */; };
+		C20B1A9A2A25DF3100DF70DD /* invoke.m in Sources */ = {isa = PBXBuildFile; fileRef = C20B1A992A25DF3100DF70DD /* invoke.m */; };
 		C283D3C429FFA8100077C47F /* WallpaperMobileAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C283D3C329FFA8100077C47F /* WallpaperMobileAppApp.swift */; };
 		C283D3C629FFA8100077C47F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C283D3C529FFA8100077C47F /* ContentView.swift */; };
 		C283D3C829FFA8120077C47F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C283D3C729FFA8120077C47F /* Assets.xcassets */; };
@@ -28,6 +29,9 @@
 /* Begin PBXFileReference section */
 		C204A3722A012FA100D31694 /* DetailsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPhotoView.swift; sourceTree = "<group>"; };
 		C204A3742A0140FA00D31694 /* ProfileUserSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserSection.swift; sourceTree = "<group>"; };
+		C20B1A982A25DF3100DF70DD /* WallpaperMobileApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WallpaperMobileApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		C20B1A992A25DF3100DF70DD /* invoke.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = invoke.m; sourceTree = "<group>"; };
+		C20B1A9B2A25E08400DF70DD /* WallpaperMobileApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WallpaperMobileApp.entitlements; sourceTree = "<group>"; };
 		C283D3C029FFA8100077C47F /* WallpaperMobileApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallpaperMobileApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C283D3C329FFA8100077C47F /* WallpaperMobileAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperMobileAppApp.swift; sourceTree = "<group>"; };
 		C283D3C529FFA8100077C47F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,6 +85,9 @@
 				C283D3D229FFAAA00077C47F /* Models */,
 				C283D3D329FFAAAD0077C47F /* ViewModels */,
 				C283D3C729FFA8120077C47F /* Assets.xcassets */,
+				C20B1A992A25DF3100DF70DD /* invoke.m */,
+				C20B1A982A25DF3100DF70DD /* WallpaperMobileApp-Bridging-Header.h */,
+				C20B1A9B2A25E08400DF70DD /* WallpaperMobileApp.entitlements */,
 				C283D3C929FFA8120077C47F /* Preview Content */,
 			);
 			path = WallpaperMobileApp;
@@ -175,6 +182,7 @@
 				TargetAttributes = {
 					C283D3BF29FFA8100077C47F = {
 						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -223,6 +231,7 @@
 				C204A3732A012FA100D31694 /* DetailsPhotoView.swift in Sources */,
 				C283D3C429FFA8100077C47F /* WallpaperMobileAppApp.swift in Sources */,
 				C283D3DC29FFB6A40077C47F /* DownloadingImagesViewModel.swift in Sources */,
+				C20B1A9A2A25DF3100DF70DD /* invoke.m in Sources */,
 				C204A3752A0140FA00D31694 /* ProfileUserSection.swift in Sources */,
 				C283D3E029FFBCF00077C47F /* PhotoModelDataService.swift in Sources */,
 				C283D3EF2A0001BC0077C47F /* ImageLoadingViewModel.swift in Sources */,
@@ -352,7 +361,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WallpaperMobileApp/WallpaperMobileApp.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WallpaperMobileApp/Preview Content\"";
 				DEVELOPMENT_TEAM = AFDF95FC8X;
@@ -371,6 +382,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = bla.WallpaperMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WallpaperMobileApp/WallpaperMobileApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -381,7 +394,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WallpaperMobileApp/WallpaperMobileApp.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WallpaperMobileApp/Preview Content\"";
 				DEVELOPMENT_TEAM = AFDF95FC8X;
@@ -400,6 +415,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = bla.WallpaperMobileApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "WallpaperMobileApp/WallpaperMobileApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
