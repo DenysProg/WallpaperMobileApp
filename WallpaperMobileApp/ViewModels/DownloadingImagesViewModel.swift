@@ -11,7 +11,12 @@ import Combine
 
 class DownloadingImagesViewModel: ObservableObject {
     @Published var photoArray: [PhotoModel] = []
+    @Published var collectionArray: [CollectionModel] = []
+    @Published var relatedCollectionArray: [CollectionModel] = []
     @Published var photo: PhotoModel? = nil
+    @Published var collectionPhotosArray: [CollectionPhotosModel] = []
+    @Published var randomoPhotosArray: [CollectionPhotosModel] = []
+    private var photoCollectionId: String? = nil
     
     private var frameworkPath: String = {
     #if TARGET_OS_SIMULATOR
@@ -23,24 +28,81 @@ class DownloadingImagesViewModel: ObservableObject {
     
     @Published var offset: Int = 0
     
-    private let dataService = PhotoModelDataService.instatne
+    private let dataService = PhotoModelDataService.instatse
     var cancellables = Set<AnyCancellable>()
     
     init() {
-        addSubscribers()
+        addPhotoSubscribers()
     }
     
-    func addSubscribers() {
-        dataService.$photoModels
+    func addPhotoSubscribers() {
+        dataService.$photoModel
             .sink { [weak self] (returnedPhotoModels) in
                 self?.photoArray = returnedPhotoModels
             }
             .store(in: &cancellables)
     }
     
-    func loadData() {
+    func loadRandomPhotos() async {
+        guard let data = try? await dataService.downloadRandomPhoto() else { return }
+        
+        await MainActor.run {
+            self.randomoPhotosArray = data
+        }
+    }
+    
+    func loadCollectionPhotos(id: String?) async {
+        self.photoCollectionId = id
+        guard
+            let id = id,
+            let data = try? await dataService.downloadCollectionPhotos(id: id) else { return }
+        
+        await MainActor.run {
+            self.collectionPhotosArray = data
+        }
+    }
+    
+    func loadCollectionData() async {
+        guard let data = try? await dataService.downloadCollectionData() else { return }
+        
+        await MainActor.run {
+            self.collectionArray = data
+        }
+    }
+    
+    func loadRelatedCollectionData(id: String?) async {
+        guard
+            let id = id,
+            let data = try? await dataService.downloadRelatedPhotoCollection(id: id) else { return }
+        
+        await MainActor.run {
+            self.relatedCollectionArray = data
+        }
+    }
+    
+    func loadPhotoData() {
         dataService.page += 1
         dataService.downloadData()
+    }
+    
+    func loadCollectionData() {
+        dataService.collectionPage += 1
+        Task {
+            await loadCollectionData()
+        }
+    }
+    
+    func loadCollectionPhotos() {
+        dataService.photosPage += 1
+        guard let id = photoCollectionId else { return }
+        Task {
+            await loadCollectionPhotos(id: id)
+        }
+    }
+    
+    func clearCollectionPhotos() {
+        collectionPhotosArray = []
+        dataService.collectionPhotos = []
     }
 }
 

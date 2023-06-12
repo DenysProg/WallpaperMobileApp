@@ -31,11 +31,13 @@ struct HomePageTab: View {
                             
                             if viewModel.offset == viewModel.photoArray.count {
                                 HStack {
+                                    Spacer()
                                     ProgressView()
                                         .padding(.vertical)
                                         .onAppear {
-                                            viewModel.loadData()
+                                            viewModel.loadPhotoData()
                                         }
+                                    Spacer()
                                 }
                                 
                             } else {
@@ -62,7 +64,7 @@ struct HomePageTab: View {
             }
             .navigationTitle("Images")
             .sheet(item: $viewModel.photo, onDismiss: nil) { photo in
-                DetailsPhotoView(url: photo.urls?.regular ?? placeHolderImage, key: photo.id, photo: photo)
+                DetailsPhotoView(url: photo.urls?.regular ?? placeHolderImage, key: photo.id ?? "", photo: photo)
             }
         }
     }

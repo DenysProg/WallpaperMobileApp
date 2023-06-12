@@ -12,7 +12,7 @@ struct DownloadingImagesRow: View {
     
     var body: some View {
         ZStack {
-            DownloadingImageView(url: photo.urls?.small ?? placeHolderImage, key: photo.id)
+            DownloadingImageView(url: photo.urls?.small ?? placeHolderImage, key: photo.id ?? "")
                 .listRowSeparator(.hidden)
         }
     }

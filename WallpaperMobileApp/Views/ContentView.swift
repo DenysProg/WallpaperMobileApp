@@ -18,12 +18,12 @@ struct ContentView: View {
                     Image(systemName: "photo")
                     Text("Photos")
                 }
-            Text("Random category")
+            RandomPhotoPageTab()
                 .tabItem {
                     Image(systemName: "photo.on.rectangle")
-                    Text("Random category")
+                    Text("Random photos")
                 }
-            Text("Category")
+            CollectionPageTab()
                 .tabItem {
                     Image(systemName: "photo.stack")
                     Text("Category")
